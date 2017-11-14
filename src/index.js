@@ -16,9 +16,14 @@ class App extends React.Component {
     };
 // need to pass data from App to VideoList (App is parent of VideoList)
     YTSearch({key: API_KEY, term: 'goats'}, (videos) => {
-      this.setState({videos: videos});
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0],
+      });
     });
   }
+
+
 
   render(){
     return (
@@ -26,6 +31,7 @@ class App extends React.Component {
         <SearchBar />
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
+          onVideoSelect={selectedVideo => this.setState({selectedVideo})}
           videos={this.state.videos}
          />
       </div>
